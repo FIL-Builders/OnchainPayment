@@ -18,7 +18,7 @@ async function main() {
     const factory = await ethers.getContractFactory("PaymentContract", wallet);
     const paymentContract = factory.attach(paymentContractAddr);
 
-    const tx = await paymentContract.pay(amount);
+    const tx = await paymentContract.payWithErc20(amount);
     console.log(tx.hash);
     await tx.wait();
 }
