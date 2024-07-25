@@ -4,7 +4,7 @@ import paymentContract from "../contracts/PaymentContract.json"
 import { erc20Abi } from '../contracts/erc20_abi'
 import { ethers } from 'ethers'
 
-const PAYMENT_CONTRACT_ADDRESS = "Your-payment-contract-address";
+const PAYMENT_CONTRACT_ADDRESS = "0x12191e7F6D1CA2Ebb25b04B178F4EF0479CEb5F0";
 const WFIL_CONTRACT_ADDRESS = "0xaC26a4Ab9cF2A8c5DBaB6fb4351ec0F4b07356c4"
 const abi = paymentContract.abi;
  
