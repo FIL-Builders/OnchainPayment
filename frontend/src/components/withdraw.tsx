@@ -11,17 +11,40 @@ import { parseEther } from "viem";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import LoadingBar from "../LoadingBar";
+import TokenModal from "../Token";
 
 import "./withdraw.css";
 
 const PAYMENT_CONTRACT_ADDRESS = "0x12191e7F6D1CA2Ebb25b04B178F4EF0479CEb5F0";
 const abi = paymentContract.abi;
 
+const availableTokens = [
+  {
+    id: 1,
+    name: "Wrapped FIL",
+    symbol: "wFIL",
+    address: "0xaC26a4Ab9cF2A8c5DBaB6fb4351ec0F4b07356c4",
+  },
+  {
+    id: 2,
+    name: "Wrapped ETH",
+    symbol: "wETH",
+    address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  },
+];
+
 export function Withdraw() {
   const [amount, setAmount] = useState("1.25");
   const { address, isConnected } = useAccount();
   const { data: hash, writeContract } = useWriteContract();
   const [progress, setProgress] = useState(0);
+
+  const [selectedToken, setSelectedToken] = useState(availableTokens[0]);
+
+  const handleTokenChange = () => {
+    console.log("handleTokenChange");
+    setSelectedToken(availableTokens[0]);
+  };
 
   const wagmiContractConfig = {
     address: PAYMENT_CONTRACT_ADDRESS,
@@ -66,8 +89,8 @@ export function Withdraw() {
 
   if (isConnected && onwerAddress == address) {
     return (
-      <div>
-        <h3 className="withdrawTitle">Withdraw Token Payment</h3>
+      <div className="ctaContainer">
+        <div className="withdrawTitle">Withdraw Token Payment</div>
         <div className="toAddress">Recipient: {address}</div>
         <div className="connectContainer">
           <ConnectButton.Custom>
@@ -163,20 +186,7 @@ export function Withdraw() {
 
                     return (
                       <div className="chainButtonContainer">
-                        <button
-                          onClick={openChainModal}
-                          className="chainButton"
-                          type="button"
-                        >
-                          {chain.iconUrl && (
-                            <img
-                              alt={chain.name ?? "Chain icon"}
-                              src={chain.iconUrl}
-                              className="chainButton"
-                            />
-                          )}
-                          {account.balanceSymbol}
-                        </button>
+                        <TokenModal selectedToken={selectedToken} />
                         <div className="balanceText">
                           Contract Balance:{" "}
                           {ethers.formatUnits(balance?.toString()!, 18)} wFIL

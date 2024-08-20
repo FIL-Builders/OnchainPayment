@@ -10,12 +10,28 @@ import { ethers } from "ethers";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import LoadingBar from "../LoadingBar";
+import TokenModal from "../Token";
 
 import "./payToken.css";
 
 const PAYMENT_CONTRACT_ADDRESS = "0x12191e7F6D1CA2Ebb25b04B178F4EF0479CEb5F0";
 const WFIL_CONTRACT_ADDRESS = "0xaC26a4Ab9cF2A8c5DBaB6fb4351ec0F4b07356c4";
 const abi = paymentContract.abi;
+
+const availableTokens = [
+  {
+    id: 1,
+    name: "Wrapped FIL",
+    symbol: "wFIL",
+    address: "0xaC26a4Ab9cF2A8c5DBaB6fb4351ec0F4b07356c4"
+  },
+  {
+    id: 2,
+    name: "Wrapped ETH",
+    symbol: "wETH",
+    address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+  }
+]
 
 export function PayToken() {
   const [amount, setAmount] = useState("1.25");
@@ -25,16 +41,22 @@ export function PayToken() {
   const { isConnected, address: payerAddress } = useAccount();
   const { data: hash, writeContract } = useWriteContract();
   const [progress, setProgress] = useState(0);
+  const [selectedToken, setSelectedToken] = useState(availableTokens[0]);
 
   const { isLoading: isConfirming, isSuccess: isConfirmed } =
     useWaitForTransactionReceipt({ hash });
+
+  const handleTokenChange = () => {
+    console.log("handleTokenChange");
+    setSelectedToken(availableTokens[0]);
+  };
 
   const handlePayment = async () => {
     setIsApproveConfirmed(false);
     setIsPaymentConfirmed(false);
     setProgress(0);
     writeContract({
-      address: WFIL_CONTRACT_ADDRESS,
+      address: selectedToken.address as `0x${string}`,
       abi: erc20Abi,
       functionName: "approve",
       args: [PAYMENT_CONTRACT_ADDRESS, ethers.parseEther(amount)],
@@ -166,20 +188,9 @@ export function PayToken() {
 
                       return (
                         <div className="chainButtonContainer">
-                          <button
-                            onClick={openChainModal}
-                            className="chainButton"
-                            type="button"
-                          >
-                            {chain.iconUrl && (
-                              <img
-                                alt={chain.name ?? "Chain icon"}
-                                src={chain.iconUrl}
-                                className="chainButton"
-                              />
-                            )}
-                            {account.balanceSymbol}
-                          </button>
+                          <TokenModal
+                            selectedToken={selectedToken}
+                          />
                           <div className="balanceText">
                             Balance:{" "}
                             {parseFloat(
