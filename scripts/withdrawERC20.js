@@ -13,11 +13,12 @@ async function main() {
     const paymentContract = factory.attach(paymentContractAddr);
 
     //Check the wFIL balance of the payment contract
-    const wFILBalance = await paymentContract.getContractBalance();
+    const wFILBalance = await paymentContract.getErc20tBalance();
+    console.log("wFIL balance is ", wFILBalance);
 
     var withdrawAmount = ethers.parseUnits('0.05', 18);
     if(withdrawAmount < wFILBalance){
-      const tx = await paymentContract.withdraw(withdrawAmount);
+      const tx = await paymentContract.withdrawErc20(withdrawAmount);
       console.log(tx.hash);
       await tx.wait();
     }else console.log("Not enought wFIL.");

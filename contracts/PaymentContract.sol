@@ -2,15 +2,16 @@
 
 pragma solidity >=0.8.2 <0.9.0;
 
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract PaymentContract {
     address paymentToken;
     address private owner;
 
-    // event for EVM logging
+    // event for FEVM logging
     event OwnerChanged(address indexed oldOwner, address indexed newOwner);
-    event PaymentReceived(address indexed payer, uint256 indexed amount);
+    event PaymentReceived(address indexed payer, address indexed token, uint256 indexed amount);
     event PaymentWithdrew(address indexed receiver, uint256 indexed amount);
 
     constructor(address _token) {
@@ -19,27 +20,44 @@ contract PaymentContract {
         emit OwnerChanged(address(0), owner);
     }
 
-    function pay(uint256 amount) public {
+    /**
+     * Pay and withdraw using ERC20 token
+     */
+    function payWithErc20(uint256 amount){
         require(IERC20(paymentToken).transferFrom(msg.sender, address(this), amount), "Payment failed");
-        emit PaymentReceived(msg.sender, amount);
+        emit PaymentReceived(msg.sender,paymentToken, amount);
         // Additional payment logic
         // (e.g., updating balances)
         // (e.g., updating storage plan)
     }
 
-    function withdraw(uint256 amount) public isOwner{
-        /**
-         * We can add some payment logic here before paying out. 
-         * For example, proof of storage deal, etc.
-         */
+    function withdrawErc20(uint256 amount) public isOwner{
+        // We can add some payment logic here before paying out. 
+        // For example, proof of storage deal, etc.
         require(IERC20(paymentToken).balanceOf(address(this)) >= amount, "Not enought balance");
         require(IERC20(paymentToken).transfer(msg.sender, amount), "Withdrawal failed");
         emit PaymentWithdrew(msg.sender,amount);
     }
 
-    // This function allow you to see how many tokens have the smart contract 
-    function getContractBalance() public isOwner view returns(uint){
+    function getErc20tBalance() public isOwner view returns(uint){
         return IERC20(paymentToken).balanceOf(address(this));
+    }
+
+    /**
+     * Pay and withdraw native FIL
+     */
+    function payWithFIL() public payable {
+        emit PaymentReceived(msg.sender,paymentToken, msg.value );
+    }
+
+    function releaseFIL(address payable to, uint256 amount) external isOwner {
+        require(address(this).balance >= amount, "Not enought FIL balance");
+        to.transfer(amount);
+        emit PaymentWithdrew(to,amount);
+    }
+
+    function getFILBalance() public isOwner view returns (uint) {
+        return address(this).balance;
     }
 
     /**

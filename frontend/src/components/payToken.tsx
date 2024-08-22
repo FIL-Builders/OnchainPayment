@@ -14,8 +14,7 @@ import TokenModal from "../Token";
 
 import "./payToken.css";
 
-const PAYMENT_CONTRACT_ADDRESS = "0x12191e7F6D1CA2Ebb25b04B178F4EF0479CEb5F0";
-const WFIL_CONTRACT_ADDRESS = "0xaC26a4Ab9cF2A8c5DBaB6fb4351ec0F4b07356c4";
+const PAYMENT_CONTRACT_ADDRESS = "0xdc406d7C9F94Ba3960fb40eba1f9F2FC6f0A1C6B";
 const abi = paymentContract.abi;
 
 const availableTokens = [
@@ -75,7 +74,7 @@ export function PayToken() {
           writeContract({
             address: PAYMENT_CONTRACT_ADDRESS,
             abi,
-            functionName: "pay",
+            functionName: "payWithErc20",
             args: [ethers.parseUnits(amount, 18)],
           });
           setIsPaymentSent(true);

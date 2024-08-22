@@ -15,7 +15,7 @@ import TokenModal from "../Token";
 
 import "./withdraw.css";
 
-const PAYMENT_CONTRACT_ADDRESS = "0x12191e7F6D1CA2Ebb25b04B178F4EF0479CEb5F0";
+const PAYMENT_CONTRACT_ADDRESS = "0xdc406d7C9F94Ba3960fb40eba1f9F2FC6f0A1C6B";
 const abi = paymentContract.abi;
 
 const availableTokens = [
@@ -56,19 +56,21 @@ export function Withdraw() {
     functionName: "getOwner",
     args: [],
   });
+  console.log("owner address is ",onwerAddress);
 
   const { data: balance } = useReadContract({
     ...wagmiContractConfig,
-    functionName: "getContractBalance",
+    functionName: "getErc20tBalance",
     args: [],
     account: address,
   });
+  console.log("Contract balance is ",balance);
 
   const handleWithdraw = async () => {
     writeContract({
       address: PAYMENT_CONTRACT_ADDRESS,
       abi: abi,
-      functionName: "withdraw",
+      functionName: "withdrawErc20",
       args: [parseEther(amount)],
     });
   };
