@@ -1,0 +1,18 @@
+.tokenSelectButton {
+  display: flex;
+  gap: 5px;
+  background-color: #0090FF;
+  border: none;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFF;
+  padding: 0.8rem 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}

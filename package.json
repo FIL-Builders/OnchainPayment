@@ -4,13 +4,14 @@
   "description": "Example of paying service on Filecoin with any tokens",
   "main": "index.js",
   "scripts": {
+    "deploy": "npx hardhat run scripts/deploy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Filecoin",
     "payment"
   ],
-  "author": "longfei",
+  "author": "longfei, XORS-eng",
   "license": "MIT",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",

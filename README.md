@@ -2,6 +2,12 @@
 
 This project demonstrates a basic example of paying with ERC20 token using the smart contract on Filecoin. This project includes a tokenPayment contract and a frontend to interact with the tokenPayment Contract. 
 
+### Installation
+
+```sh
+pnpm install
+```
+
 
 ### tokenPayment
 

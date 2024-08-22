@@ -5,20 +5,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0090FF;
 }
 
-.container {
-  text-align: center;
-  padding:0 3rem;
-  width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+@font-face {
+  font-family: "Balgin Black";
+  src: url("../public/fonts/Balgin-Black.ttf") format("truetype");
 }
 
-.connectButton{
-  position: relative;
-  display: flex;
-  justify-content: center;
+@font-face {
+  font-family: "Quicksand Regular";
+  src: url("/public/fonts/Quicksand-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Quicksand Bold";
+  src: url("/public/fonts/Quicksand-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Quicksand Light";
+  src: url("/public/fonts/Quicksand-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Quicksand Medium";
+  src: url("/public/fonts/Quicksand-Medium.ttf") format("truetype");
+  font-weight: 500;
 }
 
 .footer {
