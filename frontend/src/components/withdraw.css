@@ -57,6 +57,7 @@
 
 .withdrawContainer {
   padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .withdrawButton {
@@ -81,4 +82,17 @@
   @media (max-width: 768px) {
     font-size: 16px;
   }
+}
+
+.withdrawStatus {
+  font-family: "Quicksand Bold", sans-serif;
+  font-size: 24px;
+  color: #0090FF;
+  margin-top: 1rem;
+}
+
+.txHash {
+  font-family: "Quicksand Bold", sans-serif;
+  font-size: 16px;
+  color: red;
 }

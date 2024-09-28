@@ -1,6 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 
-import { PayToken } from "./components/payToken";
+import { PayToken } from "../components/payToken";
 
 const PayTokenPage = () => {
   return (

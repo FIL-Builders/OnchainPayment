@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import Logo from "./components/svg/Logo"
+import Logo from "./svg/Logo"
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 

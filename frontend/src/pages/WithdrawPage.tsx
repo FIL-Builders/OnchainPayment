@@ -1,6 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 
-import { Withdraw } from "./components/withdraw";
+import { Withdraw } from "../components/withdraw";
 
 const WithdrawPage = () => {
   return (

@@ -7,18 +7,21 @@
 
   @media (max-width: 768px) {
     word-break: break-all;
-    margin: 24px;
-    font-size: 18px;
+    margin: 16px;
+    font-size: 16px;
   }
 }
 
 .ctaContainer {
-  margin: 0px px;
   max-width: 1250px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 }
 
 .connectContainer {
@@ -34,8 +37,18 @@
   padding: 2rem 4rem;
 
   @media (max-width: 768px) {
-    margin: 24px;
+    margin: 16px;
     padding: 16px;
+  }
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 24px;
   }
 }
 
@@ -181,4 +194,8 @@
 
 .paymentContainer {
   padding-top: 24px;
+
+  @media (max-width: 768px) {
+    padding-top: 16px;
+  }
 }

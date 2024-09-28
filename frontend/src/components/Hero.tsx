@@ -3,8 +3,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import PayTokenPage from "./PayTokenPage";
-import WithdrawPage from "./WithdrawPage";
+import PayTokenPage from "../pages/PayTokenPage";
+import WithdrawPage from "../pages/WithdrawPage";
 import { useState } from "react";
 
 type Tab = "token" | "withdraw";
@@ -51,10 +51,8 @@ const Hero = () => {
             </button>
           </div>
           <div className="hero">
-            <div className="content mt-4">
-              {activeTab === "token" && <PayTokenPage />}
-              {activeTab === "withdraw" && <WithdrawPage />}
-            </div>
+            {activeTab === "token" && <PayTokenPage />}
+            {activeTab === "withdraw" && <WithdrawPage />}
           </div>
         </>
       )}

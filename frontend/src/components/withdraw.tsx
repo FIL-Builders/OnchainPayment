@@ -10,8 +10,8 @@ import { ethers } from "ethers";
 import { parseEther } from "viem";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-import LoadingBar from "../LoadingBar";
-import TokenModal from "../Token";
+import LoadingBar from "./LoadingBar";
+import TokenModal from "./Token";
 
 import "./withdraw.css";
 
@@ -90,7 +90,7 @@ export function Withdraw() {
   if (isConnected && onwerAddress == address) {
     return (
       <div className="ctaContainer">
-        <div className="withdrawTitle">Withdraw Token Payment</div>
+        <div className="withdrawTitle">Withdraw <br /> Token Payment</div>
         <div className="toAddress">Recipient: {address}</div>
         <div className="connectContainer">
           <ConnectButton.Custom>
@@ -189,7 +189,7 @@ export function Withdraw() {
                         <TokenModal selectedToken={selectedToken} />
                         <div className="balanceText">
                           Contract Balance:{" "}
-                          {ethers.formatUnits(balance?.toString()!, 18)} wFIL
+                          {balance ? ethers.formatUnits(balance.toString(), 18) : "0"} wFIL
                         </div>
                       </div>
                     );
@@ -208,10 +208,10 @@ export function Withdraw() {
             Withdraw
           </button>
         </div>
-        {isConfirming && <div>Waiting for confirmation...</div>}
-        {isConfirmed && <div>Payment is withdrawed...</div>}
-        {hash && <div>Transaction Hash: {hash}</div>}
-        {progress > 0 && <LoadingBar progress={progress} />}
+        {isConfirming && <div className="withdrawStatus">Waiting for confirmation...</div>}
+        {isConfirmed && <div className="withdrawStatus">Payment is withdrawn!</div>}
+        {hash && <div className="txHash">Transaction Hash: {hash}</div>}
+        {progress > 0 && progress < 100 && <LoadingBar progress={progress} />}
       </div>
     );
   }

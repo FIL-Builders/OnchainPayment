@@ -9,8 +9,8 @@ import { erc20Abi } from "../contracts/erc20_abi";
 import { ethers } from "ethers";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-import LoadingBar from "../LoadingBar";
-import TokenModal from "../Token";
+import LoadingBar from "./LoadingBar";
+import TokenModal from "./Token";
 
 import "./payToken.css";
 
@@ -90,10 +90,12 @@ export function PayToken() {
   if (isConnected) {
     return (
       <div className="ctaContainer">
-        <div className="title">Token Payment for Filecoin Storage Service</div>
-          {payerAddress && (
-            <div className="payerAddress">Payer Address: {payerAddress}</div>
-          )}
+          <div className="titleContainer">
+            <div className="title">Token Payment for Filecoin Storage Service</div>
+            {payerAddress && (
+              <div className="payerAddress">Payer Address: {payerAddress}</div>
+            )}
+          </div>
           <div className="connectContainer">
             <ConnectButton.Custom>
               {({

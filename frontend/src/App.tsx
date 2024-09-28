@@ -1,8 +1,8 @@
 import "./index.css";
 import "@rainbow-me/rainbowkit/styles.css";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Hero from "./Hero";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
 
 const App = () => {
   return (
